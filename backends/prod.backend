@@ -1,0 +1,4 @@
+bucket         = "example-master-terraform"
+key            = "prod/eks/state.tf"
+region         = "eu-west-2"
+encrypt        = true

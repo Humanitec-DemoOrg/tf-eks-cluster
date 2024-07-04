@@ -1,0 +1,3 @@
+# Terraform lock files and directories
+**/.terraform.lock.hcl
+**/.terraform/
