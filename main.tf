@@ -1,18 +1,4 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-  backend "s3" {
-   
-  }
-}
 
-provider "aws" {
-  region = "eu-west-2"
-}
 
 
 module "eks_bottlerocket" {
@@ -68,27 +54,28 @@ module "eks_bottlerocket" {
         CSICreateVolume = aws_iam_policy.CSICreateVolume.arn
       }
     }
-
-    
   }
 
-  
-  
   enable_irsa = true
 
-  tags = module.tags.tags
-}
+  access_entries = {
+    for s in local.k8s_access_entries : s.id => {
+      kubernetes_groups = []
+      principal_arn     = s.principal_arn
 
-provider "kubernetes" {
-  host                   = module.eks_bottlerocket.cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks_bottlerocket.cluster_certificate_authority_data)
-
-  exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    command     = "aws"
-    # This requires the awscli to be installed locally where Terraform is executed
-    args = ["eks", "get-token", "--cluster-name", module.eks_bottlerocket.cluster_name]
+      policy_associations = {
+        cluster_admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            namespaces = []
+            type       = "cluster"
+          }
+        }
+      }
+    }
   }
+
+  tags = module.tags.tags
 }
 
 module "route53_core" {
