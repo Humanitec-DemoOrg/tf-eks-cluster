@@ -1,6 +1,6 @@
 resource "aws_iam_role" "external_dns_controller_role" {
-  name = "AllowExternalDNSUpdatesRole-${local.environment}"
-  tags = module.tags.tags
+  name               = "AllowExternalDNSUpdatesRole-${local.environment}"
+  tags               = module.tags.tags
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",

@@ -4,8 +4,8 @@ locals {
 
 
 resource "aws_iam_role" "eks_load_balancer_controller_role" {
-  name = "AmazonEKSLoadBalancerControllerRole-${local.environment}"
-  tags = module.tags.tags
+  name               = "AmazonEKSLoadBalancerControllerRole-${local.environment}"
+  tags               = module.tags.tags
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",

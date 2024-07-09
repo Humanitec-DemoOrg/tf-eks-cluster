@@ -1,6 +1,7 @@
 locals {
   name        = var.cluster_name
   region      = var.region
+  domain      = var.domain
   environment = var.env
   default_k8s_access_entries = [
     {

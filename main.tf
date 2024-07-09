@@ -5,9 +5,9 @@ module "eks_bottlerocket" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
 
-  cluster_name    = "${local.name}"
-  cluster_version = "1.29"
-  cluster_endpoint_public_access = true
+  cluster_name                             = local.name
+  cluster_version                          = "1.29"
+  cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
   cluster_addons = {
     coredns = {
@@ -79,8 +79,8 @@ module "eks_bottlerocket" {
 }
 
 module "route53_core" {
-  source = "./modules/core"
-  domain = var.domain
+  source         = "./modules/core"
+  domain         = var.domain
   domain_aliases = var.domain_aliases
-  environment = local.environment
+  environment    = local.environment
 }

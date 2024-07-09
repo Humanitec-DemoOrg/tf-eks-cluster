@@ -1,6 +1,6 @@
 resource "aws_iam_role" "humanitec_agent_policy" {
-  name = "HumanitecAgentPolicy-${local.environment}"
-  tags = module.tags.tags
+  name               = "HumanitecAgentPolicy-${local.environment}"
+  tags               = module.tags.tags
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
