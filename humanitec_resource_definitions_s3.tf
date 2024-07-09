@@ -1,4 +1,4 @@
-resource "humanitec_resource_definition" "example" {
+resource "humanitec_resource_definition" "s3" {
   id   = "example-s3-${local.environment}"
   name = "example-s3-${local.environment}"
   type = "s3"
@@ -12,8 +12,8 @@ resource "humanitec_resource_definition" "example" {
   }
 }
 
-resource "humanitec_resource_definition_criteria" "example" {
-  resource_definition_id = humanitec_resource_definition.example.id
+resource "humanitec_resource_definition_criteria" "s3" {
+  resource_definition_id = humanitec_resource_definition.s3.id
   env_id                 = "development"
   force_delete           = true
 }
