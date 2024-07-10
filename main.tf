@@ -33,6 +33,9 @@ module "eks_bottlerocket" {
         }
       })
     }
+    eks-pod-identity-agent = {
+      most_recent = true
+    }
   }
 
   vpc_id     = data.aws_vpc.selected.id
@@ -52,7 +55,6 @@ module "eks_bottlerocket" {
 
       iam_role_additional_policies = {
         CSICreateVolume = aws_iam_policy.CSICreateVolume.arn
-        S3Access        = aws_iam_policy.eks-access-s3.arn
       }
     }
   }
