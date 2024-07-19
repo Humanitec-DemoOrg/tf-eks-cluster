@@ -83,7 +83,7 @@ module "eks_bottlerocket" {
 
 module "route53_core" {
   source         = "./modules/core"
-  domain         = var.domain
+  domain         = var.prod_domain
   domain_aliases = var.domain_aliases
   environment    = local.environment
 }

@@ -49,3 +49,17 @@ resource "humanitec_resource_definition_criteria" "s3_custom_terraform" {
   class                  = "custom-terraform"
   force_delete           = true
 }
+
+resource "humanitec_resource_definition_criteria" "s3_custom_terraform_preprod" {
+  resource_definition_id = humanitec_resource_definition.s3_custom_terraform.id
+  env_id                 = "preprod"
+  class                  = "custom-terraform"
+  force_delete           = true
+}
+
+resource "humanitec_resource_definition_criteria" "s3_custom_terraform_prod" {
+  resource_definition_id = humanitec_resource_definition.s3_custom_terraform.id
+  env_id                 = "production"
+  class                  = "custom-terraform"
+  force_delete           = true
+}

@@ -23,6 +23,21 @@ variable "domain" {
   type        = string
 }
 
+variable "dev_domain" {
+  description = "Domain name for the environment"
+  type        = string
+}
+
+variable "staging_domain" {
+  description = "Domain name for the environment"
+  type        = string
+}
+
+variable "prod_domain" {
+  description = "Domain name for the environment"
+  type        = string
+}
+
 variable "domain_aliases" {
   description = "List of domain aliases"
   type        = list(string)
