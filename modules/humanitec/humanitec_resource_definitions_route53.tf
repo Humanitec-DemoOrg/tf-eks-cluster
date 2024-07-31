@@ -1,14 +1,14 @@
 resource "humanitec_resource_definition" "dev_dns" {
-  id   = "example-dns-${local.environment}-dev"
+  id   = "example-dns-${var.environment}-dev"
   name = "Bobby Example DNS Dev"
   type = "dns"
 
   driver_type    = "humanitec/dns-aws-route53"
-  driver_account = "humanitec-cloud-account-${local.environment}"
+  driver_account = humanitec_resource_account.cloud_account.id
   driver_inputs = {
     values_string = jsonencode({
-      domain         = local.dev_domain
-      hosted_zone_id = data.aws_route53_zone.existing_zone.id
+      domain         = var.dev_domain
+      hosted_zone_id = data.aws_route53_zone.dev_zone.id
       template       = "$${context.app.id}"
     })
   }
@@ -27,15 +27,15 @@ resource "humanitec_resource_definition_criteria" "dev_dns" {
 }
 
 resource "humanitec_resource_definition" "staging_dns" {
-  id   = "example-dns-${local.environment}-staging"
+  id   = "example-dns-${var.environment}-staging"
   name = "Bobby Example DNS Staging"
   type = "dns"
 
   driver_type    = "humanitec/dns-aws-route53"
-  driver_account = "humanitec-cloud-account-${local.environment}"
+  driver_account = humanitec_resource_account.cloud_account.id
   driver_inputs = {
     values_string = jsonencode({
-      domain         = local.staging_domain
+      domain         = var.staging_domain
       hosted_zone_id = data.aws_route53_zone.staging_zone.id
       template       = "$${context.app.id}"
     })
@@ -55,15 +55,15 @@ resource "humanitec_resource_definition_criteria" "staging_dns" {
 }
 
 resource "humanitec_resource_definition" "prod_dns" {
-  id   = "example-dns-${local.environment}-prod"
+  id   = "example-dns-${var.environment}-prod"
   name = "Bobby Example DNS Prod"
   type = "dns"
 
   driver_type    = "humanitec/dns-aws-route53"
-  driver_account = "humanitec-cloud-account-${local.environment}"
+  driver_account = humanitec_resource_account.cloud_account.id
   driver_inputs = {
     values_string = jsonencode({
-      domain         = local.prod_domain
+      domain         = var.prod_domain
       hosted_zone_id = data.aws_route53_zone.prod_zone.id
       template       = "$${context.app.id}"
     })

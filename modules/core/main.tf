@@ -47,37 +47,45 @@ data "aws_route53_zone" "existing_dev_zone" {
 }
 
 
-resource "aws_route53_record" "cert_validation_records_dev" {
-  for_each = {
-    for dvo in local.unique_domain_validation_options : "${dvo.domain_name}_${dvo.resource_record_name}" => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
-    }
-  }
+# resource "aws_route53_record" "cert_validation_records_dev" {
+#   for_each = {
+#     for dvo in local.unique_domain_validation_options : "${dvo.domain_name}_${dvo.resource_record_name}" => {
+#       name   = dvo.resource_record_name
+#       record = dvo.resource_record_value
+#       type   = dvo.resource_record_type
+#     }
+#   }
 
-  name    = each.value.name
-  type    = each.value.type
-  zone_id = data.aws_route53_zone.existing_dev_zone.zone_id
-  records = [each.value.record]
-  ttl     = 60
-}
+#   lifecycle {
+#     ignore_changes = [records]
+#   }
 
-resource "aws_route53_record" "cert_validation_records_staging" {
-  for_each = {
-    for dvo in local.unique_domain_validation_options : "${dvo.domain_name}_${dvo.resource_record_name}" => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
-    }
-  }
+#   name    = each.value.name
+#   type    = each.value.type
+#   zone_id = data.aws_route53_zone.existing_dev_zone.zone_id
+#   records = [each.value.record]
+#   ttl     = 60
+# }
 
-  name    = each.value.name
-  type    = each.value.type
-  zone_id = data.aws_route53_zone.existing_staging_zone.zone_id
-  records = [each.value.record]
-  ttl     = 60
-}
+# resource "aws_route53_record" "cert_validation_records_staging" {
+#   for_each = {
+#     for dvo in local.unique_domain_validation_options : "${dvo.domain_name}_${dvo.resource_record_name}" => {
+#       name   = dvo.resource_record_name
+#       record = dvo.resource_record_value
+#       type   = dvo.resource_record_type
+#     }
+#   }
+
+#   lifecycle {
+#     ignore_changes = [records]
+#   }
+
+#   name    = each.value.name
+#   type    = each.value.type
+#   zone_id = data.aws_route53_zone.existing_staging_zone.zone_id
+#   records = [each.value.record]
+#   ttl     = 60
+# }
 
 resource "aws_route53_record" "cert_validation_records_prod" {
   for_each = {
@@ -86,6 +94,10 @@ resource "aws_route53_record" "cert_validation_records_prod" {
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
     }
+  }
+
+  lifecycle {
+    ignore_changes = [records]
   }
 
   name    = each.value.name

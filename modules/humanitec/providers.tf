@@ -20,16 +20,11 @@ terraform {
       version = "~> 2.12"
     }
   }
-  backend "s3" {
-
-  }
 }
 
 provider "aws" {
   region = "eu-west-2"
 }
-
-provider "humanitec" {}
 
 provider "kubernetes" {
   host                   = var.k8s_cluster_endpoint

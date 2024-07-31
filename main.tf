@@ -5,7 +5,7 @@ module "eks_bottlerocket" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
 
-  cluster_name                             = local.name
+  cluster_name                             = var.cluster_name
   cluster_version                          = "1.29"
   cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
@@ -86,4 +86,21 @@ module "route53_core" {
   domain         = var.prod_domain
   domain_aliases = var.domain_aliases
   environment    = local.environment
+}
+
+module "humanitec" {
+  source                     = "./modules/humanitec"
+  humanitec_org              = var.humanitec_org
+  environment                = local.environment
+  k8s_cluster_name           = module.eks_bottlerocket.cluster_name
+  k8s_cluster_endpoint       = module.eks_bottlerocket.cluster_endpoint
+  k8s_cluster_arn            = module.eks_bottlerocket.cluster_arn
+  k8s_cluster_ca_certificate = module.eks_bottlerocket.cluster_certificate_authority_data
+  tags                       = module.tags.tags
+  region                     = var.region
+  secret_store_name          = var.secret_store_name
+  domain_cert_arn            = module.route53_core.cert_arn
+  prod_domain                = var.prod_domain
+  staging_domain             = var.staging_domain
+  dev_domain                 = var.dev_domain
 }

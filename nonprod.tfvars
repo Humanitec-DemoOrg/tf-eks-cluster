@@ -7,4 +7,6 @@ dev_domain     = "dev.bobbydevlabs.org"
 staging_domain = "preprod.bobbydevlabs.org"
 prod_domain    = "bobbydevlabs.org"
 
-domain_aliases = ["*.preprod.bobbydevlabs.org", "*.dev.bobbydevlabs.org", "*.bobbydevlabs.org"]
+domain_aliases    = ["*.preprod.bobbydevlabs.org", "*.dev.bobbydevlabs.org", "*.bobbydevlabs.org"]
+humanitec_org     = "bobby-sandbox"
+secret_store_name = "bobby-secret-store"

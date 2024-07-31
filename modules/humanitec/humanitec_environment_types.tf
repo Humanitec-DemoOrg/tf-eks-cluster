@@ -1,6 +1,6 @@
 resource "humanitec_application" "newtrack" {
-  id   = "anothertrack"
-  name = "Another Track"
+  id   = "track-api15"
+  name = "track-api15"
 }
 
 resource "humanitec_environment_type" "staging" {
@@ -17,12 +17,12 @@ resource "humanitec_environment" "preprod" {
   app_id = humanitec_application.newtrack.id
   id     = "preprod"
   name   = "PreProd"
-  type   = "staging"
+  type   = humanitec_environment_type.staging.id
 }
 
 resource "humanitec_environment" "prod" {
   app_id = humanitec_application.newtrack.id
   id     = "production"
   name   = "Production"
-  type   = "production"
+  type   = humanitec_environment_type.production.id
 }

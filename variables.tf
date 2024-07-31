@@ -44,14 +44,12 @@ variable "domain_aliases" {
   default     = []
 }
 
-variable "ingress_nginx_replica_count" {
-  description = "Number of replicas for the ingress-nginx controller"
-  type        = number
-  default     = 2
+variable "humanitec_org" {
+  type        = string
+  description = "The name of the Humanitec Org"
 }
 
-variable "ingress_nginx_min_unavailable" {
-  description = "Number of allowed unavaiable replicas for the ingress-nginx controller"
-  type        = number
-  default     = 1
+variable "secret_store_name" {
+  type        = string
+  description = "The name of the Secret Store"
 }

@@ -1,10 +1,10 @@
 resource "humanitec_resource_definition" "s3_custom_terraform" {
-  id   = "example-s3-custom-terraform-${local.environment}"
-  name = "example-s3-custom-terraform-${local.environment}"
+  id   = "example-s3-custom-terraform-${var.environment}"
+  name = "example-s3-custom-terraform-${var.environment}"
   type = "s3"
 
   driver_type    = "humanitec/terraform"
-  driver_account = "humanitec-cloud-account-${local.environment}"
+  driver_account = humanitec_resource_account.cloud_account.id
   driver_inputs = {
 
     values_string = jsonencode({
@@ -32,8 +32,8 @@ resource "humanitec_resource_definition" "s3_custom_terraform" {
       }
 
       variables = {
-        region = local.region
-        prefix = local.environment
+        region = var.region
+        prefix = var.environment
 
         res_id = "$${context.res.id}"
         app_id = "$${context.app.id}"

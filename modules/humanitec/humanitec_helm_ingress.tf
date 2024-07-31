@@ -1,15 +1,3 @@
-resource "humanitec_resource_account" "aws-role" {
-  id   = "humanitec-cloud-account-${local.environment}"
-  name = "${local.environment} - Humanitec Cloud AWS"
-  type = "aws-role"
-  credentials = jsonencode({
-    aws_role    = resource.aws_iam_role.humanitec_agent_policy.arn
-    external_id = "${resource.random_id.external_id.id}"
-  })
-}
-
-
-
 # Ingress controller
 
 resource "helm_release" "ingress_nginx" {
@@ -77,7 +65,7 @@ resource "helm_release" "ingress_nginx" {
 
   set {
     name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"
-    value = module.route53_core.cert_arn
+    value = var.domain_cert_arn
   }
 
   set {
@@ -95,11 +83,6 @@ resource "helm_release" "ingress_nginx" {
     value = "internal"
   }
 
-  # set {
-  #   name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-type"
-  #   value = "nlb"
-  # }
-
   # Set the target ports for http and https
   set {
     name  = "controller.service.targetPorts.http"
@@ -116,5 +99,5 @@ resource "helm_release" "ingress_nginx" {
     value = "3600"
   }
 
-  depends_on = [module.eks_bottlerocket.eks_managed_node_groups]
+  #depends_on = [module.eks_bottlerocket.eks_managed_node_groups]
 }

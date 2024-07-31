@@ -1,7 +1,7 @@
 resource "aws_iam_policy" "humanitec-eks" {
-  name        = "HumanitecEKS-${local.environment}"
+  name        = "HumanitecEKS-${var.environment}"
   description = "Policy for Humanitec Access to EKS"
-  tags        = module.tags.tags
+  tags        = local.tags
   policy      = <<EOF
   {
     "Version": "2012-10-17",
@@ -15,7 +15,7 @@ resource "aws_iam_policy" "humanitec-eks" {
           "eks:DescribeCluster",
           "eks:ListClusters"
         ],
-        "Resource": "${module.eks_bottlerocket.cluster_arn}"
+        "Resource": "${var.k8s_cluster_arn}"
       }
     ]
   }
