@@ -1,8 +1,8 @@
 resource "aws_iam_policy" "AWSLoadBalancerControllerIAMPolicy" {
   name        = "AWSLoadBalancerControllerIAMPolicy-${local.environment}"
   description = "Policy for AWS Load Balancer Controller"
-  tags = module.tags.tags
-  policy = <<EOF
+  tags        = module.tags.tags
+  policy      = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
