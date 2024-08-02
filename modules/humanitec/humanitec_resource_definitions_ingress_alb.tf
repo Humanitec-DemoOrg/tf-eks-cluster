@@ -25,19 +25,16 @@ resource "humanitec_resource_definition_criteria" "ingress-alb-development" {
   count                  = var.loadbalancer_class == "alb" ? 1 : 0
   resource_definition_id = humanitec_resource_definition.ingress_alb.0.id
   env_type               = "development"
-  class                  = "alb"
 }
 
 resource "humanitec_resource_definition_criteria" "ingress-alb-staging" {
   count                  = var.loadbalancer_class == "alb" ? 1 : 0
   resource_definition_id = humanitec_resource_definition.ingress_alb.0.id
   env_type               = "staging"
-  class                  = "alb"
 }
 
 resource "humanitec_resource_definition_criteria" "ingress-alb-production" {
   count                  = var.loadbalancer_class == "alb" ? 1 : 0
   resource_definition_id = humanitec_resource_definition.ingress_alb.0.id
   env_type               = "production"
-  class                  = "alb"
 }
