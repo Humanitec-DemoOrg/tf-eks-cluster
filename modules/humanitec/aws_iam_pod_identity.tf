@@ -26,16 +26,6 @@ resource "aws_iam_role_policy_attachment" "example_s3" {
 }
 
 
-
-resource "aws_eks_pod_identity_association" "association" {
-  for_each        = toset(var.environments)
-  cluster_name    = var.k8s_cluster_name
-  namespace       = "${humanitec_application.newtrack.id}-${each.value}"
-  service_account = "default"
-  role_arn        = aws_iam_role.example.arn
-}
-
-
 ## Operator Secret stuff
 
 resource "aws_iam_role_policy_attachment" "attach_operator_policy_to_role" {

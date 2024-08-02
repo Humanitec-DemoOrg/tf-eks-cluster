@@ -79,3 +79,18 @@ variable "prod_domain" {
   description = "Domain name for the environment"
   type        = string
 }
+
+variable "loadbalancer_class" {
+  type    = string
+  default = "alb"
+}
+
+variable "alb_controller_role_arn" {
+  type    = string
+  default = ""
+}
+
+variable "alb_controller_ingress_address" {
+  type    = string
+  default = ""
+}

@@ -5,7 +5,7 @@ resource "helm_release" "humanitec_operator" {
   repository       = "oci://ghcr.io/humanitec/charts"
 
   chart   = "humanitec-operator"
-  version = "0.2.9" 
+  version = "0.2.9"
   wait    = true
   timeout = 600
 }

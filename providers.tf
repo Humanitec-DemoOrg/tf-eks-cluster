@@ -12,7 +12,7 @@ terraform {
 
     humanitec = {
       source  = "humanitec/humanitec"
-      version = "~> 1"
+      version = "1.6.5"
     }
 
     helm = {

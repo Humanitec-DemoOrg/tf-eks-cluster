@@ -1,6 +1,7 @@
 # Ingress controller
 
 resource "helm_release" "ingress_nginx" {
+  count            = var.loadbalancer_class == "nginx" ? 1 : 0
   name             = "ingress-nginx"
   namespace        = "ingress-nginx"
   create_namespace = true

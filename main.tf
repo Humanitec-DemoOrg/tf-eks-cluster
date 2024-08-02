@@ -96,6 +96,9 @@ module "humanitec" {
   k8s_cluster_endpoint       = module.eks_bottlerocket.cluster_endpoint
   k8s_cluster_arn            = module.eks_bottlerocket.cluster_arn
   k8s_cluster_ca_certificate = module.eks_bottlerocket.cluster_certificate_authority_data
+  loadbalancer_class         = "alb"
+  alb_controller_ingress_address = "k8s-humanitecingressg-6302cffcc2-1417064418.eu-west-2.elb.amazonaws.com"
+  alb_controller_role_arn    = aws_iam_role.eks_load_balancer_controller_role.arn
   tags                       = module.tags.tags
   region                     = var.region
   secret_store_name          = var.secret_store_name

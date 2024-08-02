@@ -1,6 +1,6 @@
 resource "humanitec_application" "newtrack" {
-  id   = "track-api15"
-  name = "track-api15"
+  id   = "track-api21"
+  name = "track-api21"
 }
 
 resource "humanitec_environment_type" "staging" {
@@ -13,16 +13,16 @@ resource "humanitec_environment_type" "production" {
   description = "Environments used for automated prod."
 }
 
-resource "humanitec_environment" "preprod" {
-  app_id = humanitec_application.newtrack.id
-  id     = "preprod"
-  name   = "PreProd"
-  type   = humanitec_environment_type.staging.id
-}
+# resource "humanitec_environment" "preprod" {
+#   app_id = humanitec_application.newtrack.id
+#   id     = "preprod"
+#   name   = "PreProd"
+#   type   = humanitec_environment_type.staging.id
+# }
 
-resource "humanitec_environment" "prod" {
-  app_id = humanitec_application.newtrack.id
-  id     = "production"
-  name   = "Production"
-  type   = humanitec_environment_type.production.id
-}
+# resource "humanitec_environment" "prod" {
+#   app_id = humanitec_application.newtrack.id
+#   id     = "production"
+#   name   = "Production"
+#   type   = humanitec_environment_type.production.id
+# }
