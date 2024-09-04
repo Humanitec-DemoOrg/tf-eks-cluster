@@ -24,7 +24,7 @@ resource "humanitec_resource_definition" "dev_dns_nginx" {
 resource "humanitec_resource_definition_criteria" "dev_dns_nginx" {
   count                  = var.loadbalancer_class == "nginx" ? 1 : 0
   resource_definition_id = humanitec_resource_definition.dev_dns_nginx.0.id
-  env_id                 = "development"
+  env_type                 = "development"
   force_delete           = true
 }
 
@@ -54,7 +54,7 @@ resource "humanitec_resource_definition" "staging_dns_nginx" {
 resource "humanitec_resource_definition_criteria" "staging_dns_nginx" {
   count                  = var.loadbalancer_class == "nginx" ? 1 : 0
   resource_definition_id = humanitec_resource_definition.staging_dns_nginx.0.id
-  env_id                 = "preprod"
+  env_type               = "preprod"
   force_delete           = true
 }
 

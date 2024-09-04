@@ -10,7 +10,7 @@ resource "humanitec_resource_definition" "dev_dns_alb" {
     values_string = jsonencode({
       domain         = var.dev_domain
       hosted_zone_id = data.aws_route53_zone.dev_zone.id
-      template       = "$${context.app.id}"
+      template       = "$${context.app.id}-$${context.env.id}"
     })
   }
 
@@ -24,6 +24,6 @@ resource "humanitec_resource_definition" "dev_dns_alb" {
 resource "humanitec_resource_definition_criteria" "dev_dns_alb" {
   count                  = var.loadbalancer_class == "alb" ? 1 : 0
   resource_definition_id = humanitec_resource_definition.dev_dns_alb.0.id
-  env_id                 = "development"
+  env_type             = "development"
   force_delete           = true
 }   

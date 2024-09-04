@@ -1,6 +1,6 @@
 resource "humanitec_application" "newtrack" {
-  id   = "track-api21"
-  name = "track-api21"
+  id   = "track-api22"
+  name = "track-api22"
 }
 
 resource "humanitec_environment_type" "staging" {

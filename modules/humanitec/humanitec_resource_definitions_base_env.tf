@@ -48,7 +48,7 @@ resource "humanitec_resource_definition" "pod_identity_base_env_terraform" {
 
 resource "humanitec_resource_definition_criteria" "pod_identity_base_env_terraform" {
   resource_definition_id = humanitec_resource_definition.pod_identity_base_env_terraform.id
-  env_id                 = "development"
+  env_type                 = "development"
   class                  = "default"
   force_delete           = true
 }
