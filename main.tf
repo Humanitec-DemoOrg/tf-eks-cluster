@@ -89,21 +89,23 @@ module "route53_core" {
 }
 
 module "humanitec" {
-  source                     = "./modules/humanitec"
-  humanitec_org              = var.humanitec_org
-  environment                = local.environment
-  k8s_cluster_name           = module.eks_bottlerocket.cluster_name
-  k8s_cluster_endpoint       = module.eks_bottlerocket.cluster_endpoint
-  k8s_cluster_arn            = module.eks_bottlerocket.cluster_arn
-  k8s_cluster_ca_certificate = module.eks_bottlerocket.cluster_certificate_authority_data
-  loadbalancer_class         = "alb"
+  source                         = "./modules/humanitec"
+  humanitec_org                  = var.humanitec_org
+  environment                    = local.environment
+  k8s_cluster_name               = module.eks_bottlerocket.cluster_name
+  k8s_cluster_endpoint           = module.eks_bottlerocket.cluster_endpoint
+  k8s_cluster_arn                = module.eks_bottlerocket.cluster_arn
+  k8s_cluster_ca_certificate     = module.eks_bottlerocket.cluster_certificate_authority_data
+  loadbalancer_class             = "alb"
   alb_controller_ingress_address = "dualstack.k8s-humanitecingressg-6302cffcc2-1760327061.eu-west-2.elb.amazonaws.com"
-  alb_controller_role_arn    = aws_iam_role.eks_load_balancer_controller_role.arn
-  tags                       = module.tags.tags
-  region                     = var.region
-  secret_store_name          = var.secret_store_name
-  domain_cert_arn            = module.route53_core.cert_arn
-  prod_domain                = var.prod_domain
-  staging_domain             = var.staging_domain
-  dev_domain                 = var.dev_domain
+  alb_controller_role_arn        = aws_iam_role.eks_load_balancer_controller_role.arn
+  tags                           = module.tags.tags
+  region                         = var.region
+  secret_store_name              = var.secret_store_name
+  domain_cert_arn                = module.route53_core.cert_arn
+  prod_domain                    = var.prod_domain
+  staging_domain                 = var.staging_domain
+  dev_domain                     = var.dev_domain
+  subnet_ids                     = data.aws_subnets.private_subnets.ids
+  vpc_security_group_ids         = [aws_security_group.postgres.id]
 }
