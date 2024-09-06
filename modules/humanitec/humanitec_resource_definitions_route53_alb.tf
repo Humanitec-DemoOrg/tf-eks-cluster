@@ -24,6 +24,6 @@ resource "humanitec_resource_definition" "dev_dns_alb" {
 resource "humanitec_resource_definition_criteria" "dev_dns_alb" {
   count                  = var.loadbalancer_class == "alb" ? 1 : 0
   resource_definition_id = humanitec_resource_definition.dev_dns_alb.0.id
-  env_type             = "development"
+  env_type               = "development"
   force_delete           = true
 }   

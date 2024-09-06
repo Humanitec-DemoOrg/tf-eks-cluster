@@ -45,21 +45,21 @@ resource "humanitec_resource_definition" "s3_custom_terraform" {
 
 resource "humanitec_resource_definition_criteria" "s3_custom_terraform" {
   resource_definition_id = humanitec_resource_definition.s3_custom_terraform.id
-  env_type                 = "development"
+  env_type               = "development"
   class                  = "custom-terraform"
   force_delete           = true
 }
 
 resource "humanitec_resource_definition_criteria" "s3_custom_terraform_preprod" {
   resource_definition_id = humanitec_resource_definition.s3_custom_terraform.id
-  env_type                 = "preprod"
+  env_type               = "preprod"
   class                  = "custom-terraform"
   force_delete           = true
 }
 
 resource "humanitec_resource_definition_criteria" "s3_custom_terraform_prod" {
   resource_definition_id = humanitec_resource_definition.s3_custom_terraform.id
-  env_type                 = "production"
+  env_type               = "production"
   class                  = "custom-terraform"
   force_delete           = true
 }

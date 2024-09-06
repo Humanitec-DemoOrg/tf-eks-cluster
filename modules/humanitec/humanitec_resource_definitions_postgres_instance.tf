@@ -1,15 +1,15 @@
-resource "humanitec_resource_definition" "postgres" {
+resource "humanitec_resource_definition" "postgres_instance" {
   driver_type = "humanitec/terraform"
-  id          = "${var.prefix}rds"
-  name        = "${var.prefix}rds"
-  type        = var.type
+  id          = "rds-shared-instance"
+  name        = "rds-shared-instance"
+  type        = "postgres-instance"
 
   driver_account = humanitec_resource_account.cloud_account.id
   driver_inputs = {
     values_string = jsonencode({
       source = {
-        path = "modules/rds/basic"
-        rev  = "refs/heads/main"
+        path = "modules/rds/basic_instance"
+        rev  = "refs/heads/wip-database-changes"
         url  = "https://github.com/humanitec-architecture/resource-packs-aws.git"
       }
 
@@ -30,10 +30,8 @@ resource "humanitec_resource_definition" "postgres" {
         env_id = "$${context.env.id}"
 
         prefix                                = var.prefix
-        name                                  = "dbname"
-        database_name                         = "dbname"
-        username                              = "username"
-        password                              = "password"
+        name                                  = "dbname10"
+        database_name                         = "dbname10"
         create_db_subnet_group                = true
         db_subnet_group_name                  = "$${context.app.id}$${context.env.id}"
         subnet_ids                            = var.subnet_ids
@@ -68,6 +66,6 @@ resource "humanitec_resource_definition" "postgres" {
 }
 
 resource "humanitec_resource_definition_criteria" "postgres-development" {
-  resource_definition_id = humanitec_resource_definition.postgres.id
+  resource_definition_id = humanitec_resource_definition.postgres_instance.id
   env_type               = "development"
 }
