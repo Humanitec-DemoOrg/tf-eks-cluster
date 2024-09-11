@@ -106,6 +106,6 @@ module "humanitec" {
   prod_domain                    = var.prod_domain
   staging_domain                 = var.staging_domain
   dev_domain                     = var.dev_domain
-  subnet_ids                     = data.aws_subnets.private_subnets.ids
+  subnet_ids                     = data.aws_subnets.public_subnets.ids
   vpc_security_group_ids         = [aws_security_group.postgres.id]
 }

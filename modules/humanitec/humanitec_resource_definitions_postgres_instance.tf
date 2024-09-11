@@ -30,8 +30,9 @@ resource "humanitec_resource_definition" "postgres_instance" {
         env_id = "$${context.env.id}"
 
         prefix                                = var.prefix
-        name                                  = "dbname10"
-        database_name                         = "dbname10"
+        name                                  = "dbname13"
+        database_name                         = "dbname13"
+        publicly_accessible                   = true
         create_db_subnet_group                = true
         db_subnet_group_name                  = "$${context.app.id}$${context.env.id}"
         subnet_ids                            = var.subnet_ids
